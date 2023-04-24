@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ extlib, ... }:
 
-with lib;
+with extlib;
 
 rec {
   # Builder for record type options

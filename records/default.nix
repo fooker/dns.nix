@@ -1,6 +1,6 @@
-{ lib, record, ... }:
+{ extlib, record, ... }:
 
-with lib;
+with extlib;
 
 let
   inherit (record) mkValueRecord mkModuleRecord;
