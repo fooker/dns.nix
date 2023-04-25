@@ -25,7 +25,7 @@ with lib;
   config = {
     data = with config; [
       (toString preference)
-      exchange
+      (toString exchange)
     ];
   };
 }

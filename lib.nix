@@ -35,19 +35,21 @@ let
 
       # Get the parent of this domain name
       parent =
-        assert labels != [ ];
-        mkDomain {
+        if labels == [ ]
+        then null # TODO: Does this hurt? Make these functions free-standing
+        else mkDomain {
           labels = init labels;
           inherit absolute;
         };
 
       # Create DNS records in a zone denoted by this domain name
+      # TODO: Should this create full-format zone tree?
       mkRecords = setAttrByPath labels;
 
       toSimpleString = concatStringsSep "." (reverseList labels);
       toString =
         if absolute
-        then "${ toSimpleString }."
+        then "${toSimpleString}."
         else toSimpleString;
 
       __toString = self: self.toString;

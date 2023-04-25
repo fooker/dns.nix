@@ -4,6 +4,8 @@ with extlib;
 
 rec {
   # Builder for record type options
+  # TODO: Can we simplify with types.coercedTo
+  # TODO: Rename singleton parameter to not shadow lib function
   mkRecordOption = { type, singleton }: mkOption {
     type =
       if singleton
@@ -16,7 +18,7 @@ rec {
   };
 
   # A simple record type containing a single value
-  mkValueRecord = rtype: { type, apply ? id, singleton ? false }: mkRecordOption {
+  mkValueRecord = rtype: { type, apply ? toString, singleton ? false }: mkRecordOption {
     inherit singleton;
 
     type = types.coercedTo type
@@ -25,7 +27,7 @@ rec {
         imports = [ module ];
         options = {
           value = mkOption {
-            type = types.equi type;
+            inherit type;
             description = "The value of the record";
           };
         };
@@ -154,7 +156,7 @@ rec {
       };
 
       data = mkOption {
-        type = types.equi (types.nonEmptyListOf types.str);
+        type = types.nonEmptyListOf types.str;
         internal = true;
       };
     };

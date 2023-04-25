@@ -34,7 +34,7 @@ in
 
     TXT = mkValueRecord "TXT" {
       type = types.str;
-      apply = value: "\"${ value }\"";
+      apply = value: "\"${value}\"";
     };
 
     MX = mkModuleRecord "MX" ./mx.nix { };

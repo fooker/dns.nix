@@ -78,8 +78,8 @@ with lib;
 
   config = {
     data = with config; [
-      mname
-      rname
+      (toString mname)
+      (toString rname)
       (toString serial)
       (toString refresh)
       (toString retry)

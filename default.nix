@@ -77,7 +77,7 @@ let
     };
     config = {
       defined = filter
-        (name: isRecord name && options.${ name }.isDefined)
+        (name: isRecord name && options.${name}.isDefined)
         (attrNames config);
 
       _module.args = { inherit extlib record; };
@@ -133,64 +133,9 @@ in
       description = "The default TTL for all records";
       default = 3600;
     };
-
-    global = mkOption {
-      type = node 0;
-      description = "The global DNS tree";
-      internal = true;
-      readOnly = true;
-    };
-
-    zoneList = mkOption {
-      type = types.listOf (types.submodule {
-        options = {
-          name = mkOption {
-            type = types.domain.absolute;
-            readOnly = true;
-            description = "The domain name of the zone";
-          };
-
-          records = mkOption {
-            type = types.listOf (types.submodule {
-              imports = [ record.module ];
-              options = {
-                domain = mkOption {
-                  type = types.domain;
-                  readOnly = true;
-                  description = "The domain name of the record";
-                };
-              };
-            });
-            readOnly = true;
-            description = "The records in the zone";
-          };
-
-          includes = mkOption {
-            type = types.listOf (types.submodule {
-              options = {
-                file = mkOption {
-                  type = types.path;
-                  readOnly = true;
-                  description = "Path of the file to include";
-                };
-
-                domain = mkOption {
-                  type = types.domain;
-                  readOnly = true;
-                  description = "The domain name of the record";
-                };
-              };
-            });
-            readOnly = true;
-            description = "The includes in the zone";
-          };
-        };
-      });
-      description = "The internal representation of the zones";
-      internal = true;
-      readOnly = true;
-    };
   };
 
-  imports = [ ./generator.nix ];
+  config.dns = {
+    zones.ttl = mkDefault config.dns.defaultTTL;
+  };
 }

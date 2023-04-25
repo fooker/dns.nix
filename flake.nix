@@ -11,5 +11,7 @@
     nixosModule = nixosModules.default;
 
     lib = import ./lib.nix;
+
+    generator = import ./generator.nix;
   };
 }
