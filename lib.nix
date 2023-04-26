@@ -91,16 +91,6 @@ in rec {
   inherit (dns) mkDomainAbsolute mkDomainRelative parseDomain;
 
   types = super.types // {
-    # Like types.uniq but merges equal definitions
-    # TODO: This is kinda hacky.
-    equi = type: mkOptionType rec {
-      name = "equi";
-      inherit (type) description check emptyValue getSubOptions getSubModules;
-      merge = mergeEqualOption;
-      substSubModules = m: equi (type.substSubModules m);
-      functor = (defaultFunctor name) // { wrapped = type; };
-    };
-
     domain =
       let
         type = mkOptionType {
