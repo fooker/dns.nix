@@ -44,5 +44,10 @@ in
     DNSKEY = mkModuleRecord "DNSKEY" ./dnskey.nix { };
 
     DS = mkModuleRecord "DS" ./ds.nix { };
+
+    PTR = mkValueRecord "PTR" {
+      type = types.str;
+      singleton = true;
+    };
   };
 }
