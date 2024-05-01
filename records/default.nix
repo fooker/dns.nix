@@ -46,7 +46,7 @@ in
     DS = mkModuleRecord "DS" ./ds.nix { };
 
     PTR = mkValueRecord "PTR" {
-      type = types.str;
+      type = types.domain;
       singleton = true;
     };
   };
