@@ -47,7 +47,6 @@ in
 
     PTR = mkValueRecord "PTR" {
       type = types.domain;
-      singleton = true;
     };
   };
 }
