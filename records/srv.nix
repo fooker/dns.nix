@@ -48,7 +48,7 @@ with lib;
       (toString priority)
       (toString weight)
       (toString port)
-      target
+      (toString target)
     ];
   };
 }
